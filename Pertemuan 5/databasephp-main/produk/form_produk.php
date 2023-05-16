@@ -93,10 +93,7 @@ require_once '../dbkoneksi.php';
   <div class="form-group row">
     <label for="jenis" class="col-4 col-form-label">Jenis Produk</label> 
     <div class="col-8">
-        <?php 
-            $sqljenis = "SELECT * FROM jenis_produk";
-            $rsjenis = $dbh->query($sqljenis);
-        ?>
+
       <select id="jenis" name="jenis" class="custom-select">
           <?php 
             foreach($rsjenis as $rowjenis){
