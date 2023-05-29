@@ -8,53 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-
-    protected $reviews = [
-        [
-            'no' => 1,
-            'film' => 'Sang Pemimpi',
-            'user' => 'Andrea Hirata',
-            'rating' => '9.0',
-            'review' => 'Dalam novel ini, Andrea mengeksplorasi hubungan persahabatannya dengan dua anak yatim piatu, Arai Ichsanul Mahidin dan Jimbron, serta kekuatan mimpi yang dapat membawa Andrea dan Arai melanjutkan studi ke Sorbonne, Paris, Prancis',
-            'tanggal' => 2006-07-25,
-        ],
-        [
-            'no' => 2,
-            'film' => 'Mencuri Raden Saleh',
-            'user' => 'Angga Dwimas',
-            'rating' => '9.2',
-            'review' => 'Sekelompok mahasiswa berencana untuk mencuri lukisan bersejarah. Lukisan tersebut adalah Penangkapan Pangeran Diponegoro karya Raden Saleh, yang berada di Istana Presiden dan tak ternilai harganya. Masing-masing memiliki peran dan tugas yang berbeda dalam menjalankan rencana pencurian ini.',
-            'tanggal' => 2018-06-21,
-        ],
-        [
-            'no' => 3,
-            'film' => 'Merantau',
-            'user' => 'Gareth Evans',
-            'rating' => '8.9',
-            'review' => 'Di Minangkabau, Sumatra Barat, Yuda (Iko Uwais), seorang pendekar silat Minangkabau aliran Harimau dalam persiapan akhir untuk memulai perantauannya. Ia harus meninggalkan keluarganya, ibu tercinta, Wulan (Christine Hakim), dan udanya (kakak dalam bahasa Minang), Yayan (Donny Alamsyah), kenyamanan, keindahan kampung halamannya, dan mencari eksistensi dirinya di keserabutan kota Jakarta',
-            'tanggal' => '2009-08-06',
-        ],
-        [
-            'no' => 4,
-            'film' => 'Laskar pelangi',
-            'user' => 'Riri riza',
-            'rating' => '9.3',
-            'review' => 'Laskar Pelangi adalah sebuah film drama Indonesia tahun 2008 yang disutradarai oleh Riri Riza dari skenario yang ditulis oleh Salman Aristo bersama Riri dan Mira Lesmana berdasarkan novel berjudul sama karya Andrea Hirata. Film ini diproduksi oleh Miles Films bersama Mizan Productions dan SinemArt.',
-            'tanggal' => '2008-09-12',
-        ],
-        [
-            'no' => 5,
-            'film' => 'Air terjun pengantin',
-            'user' => 'Rizal Mantovani',
-            'rating' => '8.7',
-            'review' => 'Film diawali dengan dukun ilmu hitam bertopeng yang menculik seorang wanita untuk dijadikan pengantinnya. Sang dukun dikejar warga setempat hingga ia terpojok ke sebuah air terjun. Karena wanita disebelahnya terus memberontak, sang dukun melempar wanita itu ke air terjun. Lalu, sang dukun menyusulnya jatuh, dan dukun yang masih hidup itu melihat wanitanya yang sudah meninggal dan frustasi, lalu membunuh seluruh warga.',
-            'tanggal' => 2009-12-03,
-        ],
-    ];
-
-    public function getAllReviews()
-    {
-        return $this->reviews;
-    }
 }
 
