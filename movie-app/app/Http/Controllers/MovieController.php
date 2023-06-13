@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Http\Controllers\Controller;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -31,20 +32,27 @@ class MovieController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'judul' => 'required',
-            'poster' => 'required',
-            'genre_id' => 'required',
-            'negara' => 'required',
-            'tahun' => 'required|integer',
-            'rating' => 'required|numeric',
-        ]);
+{
+    $validatedData = $request->validate([
+        'judul' => 'required',
+        'poster' => 'required|image',
+        'genre_id' => 'required',
+        'negara' => 'required',
+        'tahun' => 'required|integer',
+        'rating' => 'required|numeric',
+    ]);
 
-        Movie::create($validatedData);
-
-        return redirect('/movies')->with('success', 'Movie added successfully!');
+    // Upload the image
+    if ($request->hasFile('poster')) {
+        $imageName = time() . '.' . $request->file('poster')->getClientOriginalExtension();
+        $request->file('poster')->storeAs('assets/img', $imageName, 'public');
+        $validatedData['poster'] = $imageName;
     }
+
+    Movie::create($validatedData);
+
+    return redirect('/movies')->with('success', 'Movie added successfully!');
+}
 
     /**
      * Display the specified resource.
@@ -67,20 +75,31 @@ class MovieController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Movie $movie)
-    {
-        $validatedData = $request->validate([
-            'judul' => 'required',
-            'poster' => 'required',
-            'genre_id' => 'required',
-            'negara' => 'required',
-            'tahun' => 'required|integer',
-            'rating' => 'required|numeric',
-        ]);
+{
+    $validatedData = $request->validate([
+        'judul' => 'required',
+        'poster' => 'nullable|image',
+        'genre_id' => 'required',
+        'negara' => 'required',
+        'tahun' => 'required|integer',
+        'rating' => 'required|numeric',
+    ]);
 
-        $movie->update($validatedData);
+    // Check if a new image is uploaded
+    if ($request->hasFile('poster')) {
+        // Delete the old image
+        Storage::disk('public')->delete('assets/img/' . $movie->poster);
 
-        return redirect('/movies')->with('success', 'Movie updated successfully!');
+        // Upload the new image
+        $imageName = time() . '.' . $request->file('poster')->getClientOriginalExtension();
+        $request->file('poster')->storeAs('assets/img', $imageName, 'public');
+        $validatedData['poster'] = $imageName;
     }
+
+    $movie->update($validatedData);
+
+    return redirect('/movies')->with('success', 'Movie updated successfully!');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -92,3 +111,4 @@ class MovieController extends Controller
         return redirect('/movies')->with('success', 'Movie deleted successfully!');
     }
 }
+    
