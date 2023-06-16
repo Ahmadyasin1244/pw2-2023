@@ -2,58 +2,44 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $users = [
-        [
-            'no' => 1,
-            'nama' => 'Ahmad yasin',
-            'username' => 'Yasin',
-            'password' => 'ahmad123',
-            'email' => 'ahmadyasin111@gmail.com',
-            'role' => 'Media',
-        ],
-        [
-            'no' => 2,
-            'nama' => 'Riski Hidayat',
-            'username' => 'Riski',
-            'password' => 'riski123',
-            'email' => 'riski1234@gmail.com',
-            'role' => 'Administrator',
-        ],
-        [
-            'no' => 3,
-            'nama' => 'Iwanda Aulia',
-            'username' => 'Wanda',
-            'password' => 'wanda123',
-            'email' => 'wanda11122@gmail.com',
-            'role' => 'User',
-        ],
-        [
-            'no' => 4,
-            'nama' => 'Reza pahlevi',
-            'username' => 'Reza',
-            'password' => 'reza11122',
-            'email' => 'reza889@gmail.com',
-            'role' => 'User',
-        ],
-        [
-            'no' => 5,
-            'nama' => 'Bamba gusniara',
-            'username' => 'bamba',
-            'password' => 'bamba555',
-            'email' => 'bamba5533@gmail.com',
-            'role' => 'User',
-        ],
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+				'role',
     ];
 
-    public function getAllUsers()
-    {
-        return $this->users;
-    }
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }
